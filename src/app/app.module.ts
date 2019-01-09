@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import { GuestHeaderComponent } from './guest-header/guest-header.component';
   ],
   imports: [
     BrowserModule,
+      HttpClientModule,
       MDBBootstrapModule.forRoot(),
       AppRoutingModule,
       FormsModule,

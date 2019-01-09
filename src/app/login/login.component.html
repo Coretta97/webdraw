@@ -2,27 +2,27 @@
     <div class="row mt-5 justify-content-center">
         <div class="col-md-4 col-sm-6 col-12 white-block mt-5">
 
-            <form action="#" method="post" class="p-2">
+            <section class="p-2">
 
-                <h3 class="text-center"> Connexion </h3>
+                <h3 class="text-center">Connexion</h3>
                 <div class="text-center">
                     <i class="fa fa-user-circle fa-5x"></i>
                 </div>
                 <div class="md-form">
-                    <input mdbInputDirective type="text" id="email" class="form-control">
+                    <input required="required" [(ngModel)]="guest.email" mdbInputDirective type="email" id="email" class="form-control">
                     <label for="email">Email</label>
                 </div>
 
                 <div class="md-form">
-                    <input mdbInputDirective type="text" id="password" class="form-control">
+                    <input required="required" [(ngModel)]="guest.password" mdbInputDirective type="password" id="password" class="form-control">
                     <label for="password">Mot de passe</label>
                 </div>
 
                 <div class="md-form text-right">
-                    <button type="submit" class="btn btn-deep-purple">Se connecter</button>
+                    <button (click)="login()" class="btn btn-deep-purple">Se connecter</button>
                 </div>
 
-            </form>
+            </section>
         </div>
     </div>
 </main>

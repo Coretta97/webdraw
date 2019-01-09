@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Guest} from '../models/Guest';
+import {LoginService} from '../login.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    public guest: Guest;
 
-  constructor() { }
+    constructor(private loginService: LoginService) {
+        this.guest = new Guest('', '');
+    }
 
-  ngOnInit() {
-  }
+    login() {
+
+    }
+
+    ngOnInit() {
+    }
 
 }
