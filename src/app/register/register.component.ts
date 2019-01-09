@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NewUser} from '../models/NewUser';
+import {RegisterService} from '../register.service';
 
 @Component({
     selector: 'app-register',
@@ -10,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
     public user: NewUser;
 
-    constructor() {
+    constructor(private registerService: RegisterService) {
         this.user = new NewUser('', '', '', '', '');
     }
 
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
-
+        // TODO : A complété
+        this.registerService.register(this.user);
     }
 
 }

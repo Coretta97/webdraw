@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-
+        // TODO : A complété
+        this.loginService.login(this.guest);
     }
 
     ngOnInit() {

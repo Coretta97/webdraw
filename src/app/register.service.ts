@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Guest} from './models/Guest';
+import {NewUser} from './models/NewUser';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -10,21 +10,23 @@ const httpOptions = {
     })
 };
 
-
 @Injectable({
     providedIn: 'root'
 })
 
-export class LoginService {
+
+export class RegisterService {
 
     constructor(private http: HttpClient) {
     }
 
-    login(guest: Guest) {
-        return this.http.post('/api/login', {
-            email: guest.email,
-            password: guest.password
+    register(newUser: NewUser) {
+        return this.http.post('/api/register', {
+            last_name: newUser.last_name,
+            first_name: newUser.first_name,
+            email: newUser.email,
+            password: newUser.password,
+            tel: newUser.tel
         }, httpOptions);
     }
-
 }
