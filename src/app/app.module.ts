@@ -11,6 +11,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GuestHeaderComponent } from './guest-header/guest-header.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { GuestHeaderComponent } from './guest-header/guest-header.component';
       FormsModule,
       MDBBootstrapModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
