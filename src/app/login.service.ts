@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Guest} from './models/Guest';
+import {Observable} from 'rxjs';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -20,8 +21,8 @@ export class LoginService {
     constructor(private http: HttpClient) {
     }
 
-    login(guest: Guest) {
-        return this.http.post('/api/login', {
+    login(guest: Guest): Observable<object> {
+        return this.http.post<object>('/api/login', {
             email: guest.email,
             password: guest.password
         }, httpOptions);

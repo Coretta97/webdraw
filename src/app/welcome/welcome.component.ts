@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
+import {AuthenticationService} from '../authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -8,8 +9,10 @@ import {CookieService} from 'ngx-cookie-service';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private cookieService: CookieService) {
-    this.cookieService.delete('user');
+  constructor(private authentificationService: AuthenticationService, private router: Router) {
+      if (this.authentificationService.isConnected()) {
+          this.router.navigateByUrl('/home');
+      }
   }
 
   ngOnInit() {

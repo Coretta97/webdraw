@@ -32,4 +32,8 @@ export class RegisterService {
             tel: newUser.tel
         }, httpOptions);
     }
+
+    emailsUsernamesSaved(): Observable<object> {
+        return this.http.get<object>('/api/emails-usernames', httpOptions);
+    }
 }

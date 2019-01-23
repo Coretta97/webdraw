@@ -10,33 +10,39 @@
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="user.username" mdbInputDirective type="text" id="username" class="form-control">
+                    <input  [(ngModel)]="user.username" mdbInputDirective [mdbValidate]="false" type="text" id="username" class="form-control">
                     <label for="username">Pseudo</label>
+                    <span class="text-danger" *ngIf="errors.username">{{errors.username}}</span>
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="user.last_name" mdbInputDirective type="text" id="last_name" class="form-control">
+                    <input  [(ngModel)]="user.last_name" mdbInputDirective [mdbValidate]="false" type="text" id="last_name" class="form-control">
                     <label for="last_name">Nom</label>
+                    <span class="text-danger" *ngIf="errors.last_name">{{errors.last_name}}</span>
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="user.first_name" mdbInputDirective type="text" id="first_name" class="form-control">
+                    <input  [(ngModel)]="user.first_name" mdbInputDirective [mdbValidate]="false" type="text" id="first_name" class="form-control">
                     <label for="first_name">Prénom</label>
+                    <span class="text-danger" *ngIf="errors.first_name">{{errors.first_name}}</span>
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="user.email" mdbInputDirective type="email" id="email" class="form-control">
+                    <input  [(ngModel)]="user.email" mdbInputDirective [mdbValidate]="false" type="email" id="email" class="form-control">
                     <label for="email">Email</label>
+                    <span class="text-danger" *ngIf="errors.email">{{errors.email}}</span>
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="user.tel" mdbInputDirective type="tel" id="tel" class="form-control">
+                    <input  [(ngModel)]="user.tel" mdbInputDirective [mdbValidate]="false" type="tel" id="tel" class="form-control">
                     <label for="tel">Téléphone</label>
+                    <span class="text-danger" *ngIf="errors.tel">{{errors.tel}}</span>
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="user.password" mdbInputDirective type="password" id="password" class="form-control">
+                    <input  [(ngModel)]="user.password" mdbInputDirective [mdbValidate]="false" type="password" id="password" class="form-control">
                     <label for="password">Mot de passe</label>
+                    <span class="text-danger" *ngIf="errors.password">{{errors.password}}</span>
                 </div>
 
                 <div class="md-form text-right">

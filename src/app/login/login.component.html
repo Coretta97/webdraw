@@ -9,14 +9,17 @@
                     <i class="fa fa-user-circle fa-5x"></i>
                 </div>
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="guest.email" mdbInputDirective type="email" id="email" class="form-control">
+                    <input required="required" [(ngModel)]="guest.email" [mdbValidate]="false" mdbInputDirective type="email" id="email" class="form-control">
                     <label for="email">Email ou Pseudo</label>
+                    <span class="text-danger" *ngIf="errors.email">{{errors.email}}</span>
                 </div>
 
                 <div class="md-form">
-                    <input required="required" [(ngModel)]="guest.password" mdbInputDirective type="password" id="password" class="form-control">
+                    <input required="required" [(ngModel)]="guest.password" [mdbValidate]="false" mdbInputDirective type="password" id="password" class="form-control">
                     <label for="password">Mot de passe</label>
+                    <span class="text-danger" *ngIf="errors.password">{{errors.password}}</span>
                 </div>
+                <span class="text-danger" *ngIf="errors.auth_info">Les informations sont incorrects.</span>
 
                 <div class="md-form text-right">
                     <button (click)="login()" class="btn btn-deep-purple">Se connecter</button>
