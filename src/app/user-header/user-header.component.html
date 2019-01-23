@@ -1,20 +1,23 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark deep-purple darken-4">
 
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" routerLink="">Webdraw</a></mdb-navbar-brand>
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" routerLink="">Webdraw</a></mdb-navbar-brand>
 
-  <!-- Collapsible content -->
-  <links>
+    <!-- Collapsible content -->
+    <links>
 
-    <!-- Links -->
-    <ul class="navbar-nav ml-auto">
-      <li [class]="'nav-item '+ (active==='home'?'active':'') ">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/home">Accueil</a>
-      </li>
-    </ul>
-    <!-- Links -->
-  </links>
-  <!-- Collapsible content -->
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+            <li [class]="'nav-item '+ (active==='home'?'active':'') ">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/home">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-deep-purple p-2 my-0 ml-md-3 ml-auto" style="border-radius: 50px" (click)="disconnect()">Deconnexion</button>
+            </li>
+        </ul>
+        <!-- Links -->
+    </links>
+    <!-- Collapsible content -->
 </mdb-navbar>
 <!--/.Navbar-->
