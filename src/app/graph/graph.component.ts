@@ -11,6 +11,9 @@ export class GraphComponent implements OnInit {
     private diagram: go.Diagram = new go.Diagram();
     private palette: go.Palette = new go.Palette();
 
+    private $ = go.GraphObject.make;
+
+
     @ViewChild('diagramDiv')
     private diagramRef: ElementRef;
 
@@ -28,7 +31,7 @@ export class GraphComponent implements OnInit {
     modelChanged = new EventEmitter<go.ChangedEvent>();
 
     constructor() {
-        const $ = go.GraphObject.make;
+
         // Place GoJS license key here:
         (go as any).licenseKey = 'localhost';
         this.diagram = new go.Diagram();
@@ -43,37 +46,36 @@ export class GraphComponent implements OnInit {
             });
         this.diagram.addModelChangedListener(e => e.isTransactionFinished && this.modelChanged.emit(e));
 
-
         // the item template for properties
         const propertyTemplate =
-            $(go.Panel, 'Horizontal',
+            this.$(go.Panel, 'Horizontal',
                 // property name, underlined if scope=='class' to indicate static property
-                $(go.TextBlock,
+                this.$(go.TextBlock,
                     { isMultiline: false, editable: true },
                     new go.Binding('text', 'name').makeTwoWay(),
                     new go.Binding('isUnderline', 'scope', function(s) { return s[0] === 'c'} )),
                 // property type, if known
-                $(go.TextBlock, '',
+                this.$(go.TextBlock, '',
                     new go.Binding('text', 'type', function(t) { return (t ? ': ' : ''); })),
-                $(go.TextBlock,
+                this.$(go.TextBlock,
                     { isMultiline: false, editable: true },
                     new go.Binding('text', 'type').makeTwoWay()),
                 // property default value, if any
-                $(go.TextBlock,
+                this.$(go.TextBlock,
                     { isMultiline: false, editable: false },
                     new go.Binding('text', 'default', function(s) { return s ? ' = ' + s : ''; }))
             );
 
         // the item template for methods
         const methodTemplate =
-            $(go.Panel, 'Horizontal',
+            this.$(go.Panel, 'Horizontal',
                 // method name, underlined if scope=='class' to indicate static method
-                $(go.TextBlock,
+                this.$(go.TextBlock,
                     { isMultiline: false, editable: true },
                     new go.Binding('text', 'name').makeTwoWay(),
                     new go.Binding('isUnderline', 'scope', function(s) { return s[0] === 'c' })),
                 // method parameters
-                $(go.TextBlock, '()',
+                this.$(go.TextBlock, '()',
                     // this does not permit adding/editing/removing of parameters via inplace edits
                     new go.Binding('text', 'parameters', function(parr) {
                         let s = '(';
@@ -85,14 +87,14 @@ export class GraphComponent implements OnInit {
                         return s + ')';
                     })),
                 // method return type, if any
-                $(go.TextBlock, '',
+                this.$(go.TextBlock, '',
                     new go.Binding('text', 'type', function(t) { return (t ? ': ' : ''); })),
-                $(go.TextBlock,
+                this.$(go.TextBlock,
                     { isMultiline: false, editable: true },
                     new go.Binding('text', 'type').makeTwoWay())
             );
         this.diagram.nodeTemplate =
-            $(go.Node, 'Auto',  // the whole node panel
+            this.$(go.Node, 'Auto',  // the whole node panel
                 { selectionAdorned: true,
                     resizable: false,
                     layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized,
@@ -105,16 +107,16 @@ export class GraphComponent implements OnInit {
                 // clear out any desiredSize set by the ResizingTool.
                 // new go.Binding('desiredSize', 'visible', function(v) { return new go.Size(NaN, NaN); }).ofObject('LIST'),
                 // define the node's outer shape, which will surround the Table
-                $(go.Shape, 'Rectangle',
+                this.$(go.Shape, 'Rectangle',
                     { fill: 'white', stroke: '#756875', strokeWidth: 1, portId: '', cursor: 'pointer',
                         // allow many kinds of links
                         fromLinkable: true, toLinkable: true,
                         fromLinkableSelfNode: true, toLinkableSelfNode: true,
                         fromLinkableDuplicates: true, toLinkableDuplicates: true }),
-                $(go.Panel, 'Table',
-                    { defaultRowSeparatorStroke: 'black' },
+                this.$(go.Panel, 'Table',
+                    { defaultRowSeparatorStroke: 'black', minSize : new go.Size(200 , 0) },
                     // header
-                    $(go.TextBlock,
+                    this.$(go.TextBlock,
                         {
                             row: 0, columnSpan: 2, margin: 10, alignment: go.Spot.Center,
                             font: 'bold 12pt sans-serif',
@@ -122,10 +124,10 @@ export class GraphComponent implements OnInit {
                         },
                         new go.Binding('text', 'text').makeTwoWay()),
                     // properties
-                    $(go.TextBlock, 'Properties',
+                    this.$(go.TextBlock, 'Properties',
                         { row: 1, font: 'italic 10pt sans-serif' },
                         new go.Binding('visible', 'visible', function(v) { return !v; }).ofObject('PROPERTIES')),
-                    $(go.Panel, 'Vertical', { name: 'PROPERTIES' },
+                    this.$(go.Panel, 'Vertical', { name: 'PROPERTIES' },
                         new go.Binding('itemArray', 'properties'),
                         {
                             row: 1, margin: 3, stretch: go.GraphObject.Fill,
@@ -133,14 +135,14 @@ export class GraphComponent implements OnInit {
                             itemTemplate: propertyTemplate
                         }
                     ),
-                    $('PanelExpanderButton', 'PROPERTIES',
+                    this.$('PanelExpanderButton', 'PROPERTIES',
                         { row: 1, column: 1, alignment: go.Spot.TopRight, visible: false },
                         new go.Binding('visible', 'properties', function(arr) { return arr.length > 0; })),
                     // methods
-                    $(go.TextBlock, 'Methods',
+                    this.$(go.TextBlock, 'Methods',
                         { row: 2, font: 'italic 10pt sans-serif' },
                         new go.Binding('visible', 'visible', function(v) { return !v; }).ofObject('METHODS')),
-                    $(go.Panel, 'Vertical', { name: 'METHODS' },
+                    this.$(go.Panel, 'Vertical', { name: 'METHODS' },
                         new go.Binding('itemArray', 'methods'),
                         {
                             row: 2, margin: 3, stretch: go.GraphObject.Fill,
@@ -148,65 +150,13 @@ export class GraphComponent implements OnInit {
                             itemTemplate: methodTemplate
                         }
                     ),
-                    $('PanelExpanderButton', 'METHODS',
+                    this.$('PanelExpanderButton', 'METHODS',
                         { row: 2, column: 1, alignment: go.Spot.TopRight, visible: false },
                         new go.Binding('visible', 'methods', function(arr) { return arr.length > 0; }))
                 )  // end Table Panel
             );  // end Node
-
-
-        function convertIsTreeLink(r) {
-            return r === 'generalization';
-        }
-
-        function convertFromArrow(r) {
-            switch (r) {
-                case 'generalization': return '';
-                default: return '';
-            }
-        }
-
-        function convertToArrow(r) {
-            switch (r) {
-                case 'generalization': return 'Triangle';
-                case 'aggregation': return 'StretchedDiamond';
-                default: return '';
-            }
-        }
         this.diagram.linkTemplate =
-            $(go.Link,
-                // allow relinking
-                { relinkableFrom: true, relinkableTo: true, routing: go.Link.Orthogonal },
-                $(go.Shape),
-                $(go.Shape, { toArrow: 'OpenTriangle' }),
-                $(go.TextBlock, '1',
-                    {
-                        font: '400 9pt Source Sans Pro, sans-serif',
-                        segmentIndex: 1,
-                        segmentOffset: new go.Point(NaN, NaN),
-                        isMultiline: false,
-                        editable: true
-                    },
-                    new go.Binding('card_l', 'card_l').makeTwoWay()),
-                $(go.TextBlock, 'relation',
-                    {
-                        font: '400 9pt Source Sans Pro, sans-serif',
-                        segmentIndex: 2,
-                        segmentOffset: new go.Point(NaN, NaN),
-                        isMultiline: false,
-                        editable: true
-                    },
-                    new go.Binding('text', 'text').makeTwoWay()),
-                $(go.TextBlock, '1',
-                    {
-                        font: '400 9pt Source Sans Pro, sans-serif',
-                        segmentIndex: 4,
-                        segmentOffset: new go.Point(-20, -10),
-                        isMultiline: false,
-                        editable: true
-                    },
-                    new go.Binding('card_r', 'card_r').makeTwoWay()),
-            );
+            this.createLinkTemplate(0);
 
         this.palette = new go.Palette();
         this.palette.nodeTemplateMap = this.diagram.nodeTemplateMap;
@@ -216,6 +166,74 @@ export class GraphComponent implements OnInit {
             [
                 { text: 'class', color: 'lightblue' },
             ];
+    }
+
+    private createLinkTemplate(type: number) {
+        function convertToArrow(t) {
+            switch (t) {
+                case 0:
+                    return 'OpenTriangle';
+                case 1:
+                    return 'Triangle';
+                case 2:
+                    return 'StretchedDiamond';
+                case 3:
+                    return 'StretchedDiamond';
+                default:
+                    return 'Triangle';
+            }
+        }
+        function convertFill(f) {
+            switch (f) {
+                case 0:
+                    return 'white';
+                case 1:
+                    return 'white';
+                case 2:
+                    return 'white';
+                case 3:
+                    return 'back';
+                default:
+                    return 'white';
+            }
+        }
+        const link =  this.$(go.Link,
+            // allow relinking
+            { relinkableFrom: true, relinkableTo: true, routing: go.Link.Orthogonal },
+            this.$(go.Shape),
+            this.$(go.Shape, new go.Binding('fill', 'relationship', convertFill), new go.Binding('toArrow', 'relationship', convertToArrow)),
+            this.$(go.TextBlock, '1',
+                {
+                    font: '400 9pt Source Sans Pro, sans-serif',
+                    segmentIndex: 1,
+                    segmentOffset: new go.Point(NaN, NaN),
+                    isMultiline: false,
+                    editable: true
+                },
+                new go.Binding('card_l', 'card_l').makeTwoWay()),
+            this.$(go.TextBlock, 'relation',
+                {
+                    font: '400 9pt Source Sans Pro, sans-serif',
+                    segmentIndex: 2,
+                    segmentOffset: new go.Point(NaN, NaN),
+                    isMultiline: false,
+                    editable: true
+                },
+                new go.Binding('text', 'text').makeTwoWay()),
+            this.$(go.TextBlock, '1',
+                {
+                    font: '400 9pt Source Sans Pro, sans-serif',
+                    segmentIndex: 4,
+                    segmentOffset: new go.Point(-20, -10),
+                    isMultiline: false,
+                    editable: true
+                },
+                new go.Binding('card_r', 'card_r').makeTwoWay()),
+        );
+        return link;
+    }
+    setLink(type: number) {
+
     }
 
     ngOnInit() {

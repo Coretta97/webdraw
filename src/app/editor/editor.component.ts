@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FilesService} from '../files.service';
 import {File} from '../models/File';
 import * as go from 'gojs';
+import {MDBModalRef} from 'angular-bootstrap-md';
 
 @Component({
     selector: 'app-editor',
@@ -38,10 +39,10 @@ export class EditorComponent implements OnInit {
     node: go.Node;
 
     @ViewChild('basicModal')
-    private addAttributeModal: ElementRef;
+    private addAttributeModal: MDBModalRef;
 
     @ViewChild('basicModal2')
-    private addMethodModal: ElementRef;
+    private addMethodModal: MDBModalRef;
 
 
 
@@ -53,7 +54,9 @@ export class EditorComponent implements OnInit {
         const him: EditorComponent = this;
         this.filesService.files().subscribe(r => {
             if (r['error']) {
-                // Nothing to do for the moment
+                if (this.file === null) {
+                    this.router.navigateByUrl('/home');
+                }
             } else {
                 r['files'].forEach(function (file) {
                     him.files.push(new File(file.idfile, file.name, file.user_id, file.datefile, file.content));
@@ -63,6 +66,12 @@ export class EditorComponent implements OnInit {
                         him.file = file;
 
                         const content = JSON.parse(him.file.content);
+                        content['links'].forEach(link => {
+                            if (! link.relationship) {
+                                link.relationship = '';
+                            }
+                        });
+
                         him.model = new go.GraphLinksModel(content['nodes'], content['links']);
                     }
                 });

@@ -1,7 +1,35 @@
 <div class="diagramsPanel row">
     <div #diagramDiv class="diagramDiv col-9"></div>
+
     <div class="col-3">
         <div #paletteDiv class="paletteDiv"></div>
+
+        <h3>Type de lien</h3>
+        <div>
+            <!-- Default checked -->
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="association" name="linkType" checked mdbInputDirective (click)="setLink(0)">
+                <label class="custom-control-label" for="association">Association</label>
+            </div>
+
+            <!-- Default unchecked -->
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="heritage" name="linkType" mdbInputDirective (click)="setLink(1)">
+                <label class="custom-control-label" for="heritage">Héritage</label>
+            </div>
+
+            <!-- Default unchecked -->
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="aggregation" name="linkType" mdbInputDirective (click)="setLink(2)">
+                <label class="custom-control-label" for="aggregation">Aggrégation</label>
+            </div>
+
+            <!-- Default unchecked -->
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="composition" name="linkType" mdbInputDirective (click)="setLink(3)">
+                <label class="custom-control-label" for="composition">Composition</label>
+            </div>
+        </div>
     </div>
 
 </div>
