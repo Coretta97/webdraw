@@ -11,6 +11,7 @@ export class GraphComponent implements OnInit {
     private diagram: go.Diagram = new go.Diagram();
     private palette: go.Palette = new go.Palette();
 
+    private linkType = 1;
     private $ = go.GraphObject.make;
 
 
@@ -31,9 +32,7 @@ export class GraphComponent implements OnInit {
     modelChanged = new EventEmitter<go.ChangedEvent>();
 
     constructor() {
-
-        // Place GoJS license key here:
-        (go as any).licenseKey = 'localhost';
+        const him = this;
         this.diagram = new go.Diagram();
         this.diagram.initialContentAlignment = go.Spot.Center;
         this.diagram.allowDrop = true;
@@ -44,7 +43,23 @@ export class GraphComponent implements OnInit {
                 const node = e.diagram.selection.first();
                 this.nodeSelected.emit(node instanceof go.Node ? node : null);
             });
-        this.diagram.addModelChangedListener(e => e.isTransactionFinished && this.modelChanged.emit(e));
+        this.diagram.addModelChangedListener(e => {
+            return e.isTransactionFinished && this.modelChanged.emit(e);
+        });
+
+        this.diagram.addDiagramListener('LinkDrawn', function(e) {
+            const link = e.subject;
+            if (!link.data.relationship) {
+                link.data.relationship = him.linkType;
+            }
+            if (!link.data.card_l) {
+                link.data.card_l = '1';
+            }
+            if (!link.data.card_r) {
+                link.data.card_r = '1';
+            }
+            link.updateTargetBindings();
+        });
 
         // the item template for properties
         const propertyTemplate =
@@ -156,7 +171,7 @@ export class GraphComponent implements OnInit {
                 )  // end Table Panel
             );  // end Node
         this.diagram.linkTemplate =
-            this.createLinkTemplate(0);
+            this.createLinkTemplate(1);
 
         this.palette = new go.Palette();
         this.palette.nodeTemplateMap = this.diagram.nodeTemplateMap;
@@ -199,7 +214,7 @@ export class GraphComponent implements OnInit {
         }
         const link =  this.$(go.Link,
             // allow relinking
-            { relinkableFrom: true, relinkableTo: true, routing: go.Link.Orthogonal },
+            { relinkableFrom: true, relinkableTo: true, routing: go.Link.Orthogonal},
             this.$(go.Shape),
             this.$(go.Shape, new go.Binding('fill', 'relationship', convertFill), new go.Binding('toArrow', 'relationship', convertToArrow)),
             this.$(go.TextBlock, '1',

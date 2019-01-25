@@ -68,7 +68,7 @@ export class EditorComponent implements OnInit {
                         const content = JSON.parse(him.file.content);
                         content['links'].forEach(link => {
                             if (! link.relationship) {
-                                link.relationship = '';
+                                link.relationship = 1;
                             }
                         });
 
