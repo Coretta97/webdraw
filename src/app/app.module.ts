@@ -14,6 +14,7 @@ import { GuestHeaderComponent } from './guest-header/guest-header.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { EditorComponent } from './editor/editor.component';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EditorComponent } from './editor/editor.component';
     RegisterComponent,
     GuestHeaderComponent,
     UserHeaderComponent,
-    EditorComponent
+    EditorComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
+import {File} from './models/File';
 
 
 const httpOptions = {
@@ -23,4 +24,15 @@ export class FilesService {
     files(): Observable<object> {
         return this.http.get('/api/files/' + (this.authentificationService.getUser().iduser), httpOptions);
     }
+
+    save(file: File): Observable<object> {
+        return this.http.post('/api/save-file', {
+            idfile : file.idfile,
+            name : file.name,
+            content : file.content,
+            datefile : file.datefile,
+            user_id : file.user_id
+        }, httpOptions);
+    }
+
 }

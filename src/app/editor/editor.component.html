@@ -1,1 +1,27 @@
 <app-user-header [active]="null"></app-user-header>
+<div class="pt-2">
+    <app-graph
+            [model]="model"
+            (nodeSelected)="showDetails($event)"
+            (modelChanged)="onModelChanged($event)">
+    </app-graph>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 pt-3" style="border-right: 1px solid blueviolet">
+                <form *ngIf="node" #form="ngForm" (ngSubmit)="onCommitDetails()">
+                    <h4>Détails</h4>
+                    <div class="md-form">
+                        <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="data.text" id="name" type="text" name="text">
+                        <label for="name">Nom</label>
+                    </div>
+                </form>
+            </div>
+            <div class="col-6 text-right pt-3">
+                <button class="btn btn-deep-purple mr-2" style="border-radius: 30px" (click)="save()">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
