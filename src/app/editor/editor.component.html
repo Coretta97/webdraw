@@ -1,24 +1,88 @@
 <app-user-header [active]="null"></app-user-header>
-<div class="pt-2">
-    <app-graph
-            [model]="model"
-            (nodeSelected)="showDetails($event)"
-            (modelChanged)="onModelChanged($event)">
-    </app-graph>
-    <div class="container">
-        <div class="row">
-            <div class="col-6 pt-3" style="border-right: 1px solid blueviolet">
-                <form *ngIf="node" #form="ngForm" (ngSubmit)="onCommitDetails()">
-                    <h4>Détails</h4>
-                    <div class="md-form">
-                        <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="data.text" id="name" type="text" name="text">
-                        <label for="name">Nom</label>
+<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-3" style="border-right: 1px solid blueviolet">
+            <form *ngIf="node" #form="ngForm" (ngSubmit)="onCommitDetails()">
+                <h4>Détails</h4>
+                <div class="md-form">
+                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="data.text" id="text" type="text" name="text">
+                    <label for="text">Nom</label>
+                </div>
+            </form>
+            <div *ngIf="node" class="mt-2 text-center">
+                <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Attribut</button>
+
+                <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title w-100" id="myModalLabel">Nouvel attribut</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="md-form">
+                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="attribute.name" id="att-name" type="text" name="att-name">
+                                    <label for="att-name">Nom</label>
+                                </div>
+                                <div class="md-form">
+                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="attribute.type" id="att-type" type="text" name="att-type">
+                                    <label for="att-type">Type</label>
+                                </div>
+                                <div *ngIf="attribute.error" class="text-danger">Tous champs sont obligatoires</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Annuler</button>
+                                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="addAttribute()">Ajouter</button>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
+                <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal2.show()" mdbWavesEffect>Methode</button>
+
+                <div mdbModal #basicModal2="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal2.hide()">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title w-100" id="myModalLabel2">Nouvelle methode</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="md-form">
+                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="method.name" id="met-name" type="text" name="met-name">
+                                    <label for="met-name">Nom</label>
+                                </div>
+                                <div class="md-form">
+                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="method.type" id="met-type" type="text" name="met-type">
+                                    <label for="met-type">Type</label>
+                                </div>
+                                <div *ngIf="attribute.error" class="text-danger">Tous champs sont obligatoires</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal2.hide()" mdbWavesEffect>Annuler</button>
+                                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="addMethod()" >Ajouter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-6 text-right pt-3">
-                <button class="btn btn-deep-purple mr-2" style="border-radius: 30px" (click)="save()">Sauvegarder</button>
-            </div>
+        </div>
+        <div class="col-9">
+            <app-graph
+                    [model]="model"
+                    (nodeSelected)="showDetails($event)"
+                    (modelChanged)="onModelChanged($event)">
+            </app-graph>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center pt-3">
+            <button mdbWavesEffect="" class="btn btn-deep-purple" style="border-radius: 30px" (click)="save()">Sauvegarder</button>
         </div>
     </div>
 

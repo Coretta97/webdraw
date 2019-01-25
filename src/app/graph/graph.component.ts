@@ -94,7 +94,7 @@ export class GraphComponent implements OnInit {
         this.diagram.nodeTemplate =
             $(go.Node, 'Auto',  // the whole node panel
                 { selectionAdorned: true,
-                    resizable: true,
+                    resizable: false,
                     layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized,
                     fromSpot: go.Spot.AllSides,
                     toSpot: go.Spot.AllSides,

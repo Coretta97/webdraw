@@ -1,20 +1,11 @@
-.diagramsPanel {
-  width:100%;
-  white-space:nowrap;
-}
+
 
 .diagramDiv {
-  border: 1px solid black;
-  display: inline-block;
-  vertical-align: top;
-  width: 80%;
+  border-radius: 3px;
+  background-color: rgba(138, 43, 226, 0.07);
   height: 400px;
 }
 
 .paletteDiv {
-  border: 1px solid black;
-  display: inline-block;
-  vertical-align: top;
-  width: 19%;
-  height: 400px;
+  height: 200px;
 }

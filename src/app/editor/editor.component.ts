@@ -15,6 +15,16 @@ export class EditorComponent implements OnInit {
     private files: File[] = [];
     private file_names: string[] = [];
     public file: File = null;
+    public attribute = {
+        name:  '',
+        type : '',
+        error : false
+    };
+    public method = {
+        name: '',
+        type : '',
+        error : false
+    };
 
     model;
 
@@ -23,6 +33,14 @@ export class EditorComponent implements OnInit {
 
     data: any;
     node: go.Node;
+
+    @ViewChild('basicModal')
+    private addAttributeModal: ElementRef;
+
+    @ViewChild('basicModal2')
+    private addMethodModal: ElementRef;
+
+
 
     constructor(private authentificationService: AuthenticationService, private filesService: FilesService, private router: Router, private activatedRoute: ActivatedRoute) {
         if (!this.authentificationService.isConnected()) {
@@ -50,6 +68,47 @@ export class EditorComponent implements OnInit {
                 }
             }
         });
+    }
+
+    addAttribute() {
+        if (this.attribute.name !== '' && this.attribute.type !== '') {
+            if (this.node) {
+                if (! this.node.data.properties) {
+                    this.node.data.properties = [];
+                }
+                this.node.data.properties.push({name: this.attribute.name, type: this.attribute.type});
+            }
+            this.node.updateTargetBindings();
+            this.attribute = {
+                name: '',
+                type: '',
+                error : false
+            }
+            this.addAttributeModal.hide();
+        } else {
+            this.attribute.error = true;
+        }
+    }
+
+    addMethod() {
+        if (this.method.name !== '' && this.method.type !== '') {
+            if (this.node) {
+                if (! this.node.data.methods) {
+                    this.node.data.methods = [];
+                }
+                this.node.data.methods.push({name: this.method.name, type: this.method.type});
+            }
+            this.node.updateTargetBindings();
+            this.method = {
+                name: '',
+                type: '',
+                error: false
+            }
+            this.addMethodModal.hide();
+        } else {
+            this.method.error = true;
+        }
+
     }
 
     save(): void {
