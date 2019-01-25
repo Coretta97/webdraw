@@ -176,9 +176,36 @@ export class GraphComponent implements OnInit {
         this.diagram.linkTemplate =
             $(go.Link,
                 // allow relinking
-                { relinkableFrom: true, relinkableTo: true },
+                { relinkableFrom: true, relinkableTo: true, routing: go.Link.Orthogonal },
                 $(go.Shape),
-                $(go.Shape, { toArrow: 'OpenTriangle' })
+                $(go.Shape, { toArrow: 'OpenTriangle' }),
+                $(go.TextBlock, '1',
+                    {
+                        font: '400 9pt Source Sans Pro, sans-serif',
+                        segmentIndex: 1,
+                        segmentOffset: new go.Point(NaN, NaN),
+                        isMultiline: false,
+                        editable: true
+                    },
+                    new go.Binding('card_l', 'card_l').makeTwoWay()),
+                $(go.TextBlock, 'relation',
+                    {
+                        font: '400 9pt Source Sans Pro, sans-serif',
+                        segmentIndex: 2,
+                        segmentOffset: new go.Point(NaN, NaN),
+                        isMultiline: false,
+                        editable: true
+                    },
+                    new go.Binding('text', 'text').makeTwoWay()),
+                $(go.TextBlock, '1',
+                    {
+                        font: '400 9pt Source Sans Pro, sans-serif',
+                        segmentIndex: 4,
+                        segmentOffset: new go.Point(-20, -10),
+                        isMultiline: false,
+                        editable: true
+                    },
+                    new go.Binding('card_r', 'card_r').makeTwoWay()),
             );
 
         this.palette = new go.Palette();
