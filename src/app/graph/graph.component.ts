@@ -129,7 +129,7 @@ export class GraphComponent implements OnInit {
                         new go.Binding('itemArray', 'properties'),
                         {
                             row: 1, margin: 3, stretch: go.GraphObject.Fill,
-                            defaultAlignment: go.Spot.Left, background: 'lightyellow',
+                            defaultAlignment: go.Spot.Left, background: 'white',
                             itemTemplate: propertyTemplate
                         }
                     ),
@@ -144,7 +144,7 @@ export class GraphComponent implements OnInit {
                         new go.Binding('itemArray', 'methods'),
                         {
                             row: 2, margin: 3, stretch: go.GraphObject.Fill,
-                            defaultAlignment: go.Spot.Left, background: 'lightyellow',
+                            defaultAlignment: go.Spot.Left, background: 'white',
                             itemTemplate: methodTemplate
                         }
                     ),

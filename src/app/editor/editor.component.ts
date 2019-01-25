@@ -18,13 +18,16 @@ export class EditorComponent implements OnInit {
     public attribute = {
         name:  '',
         type : '',
-        error : false
+        error : false,
+        del_att: null,
     };
     public method = {
         name: '',
         type : '',
-        error : false
+        error : false,
+        del_met: null
     };
+
 
     model;
 
@@ -70,6 +73,26 @@ export class EditorComponent implements OnInit {
         });
     }
 
+    deleteAttribute() {
+        const name = this.attribute.del_att;
+        if (this.attribute.del_att) {
+            this.node.data.properties = this.node.data.properties.filter(property => {
+                return property.name !== name;
+            });
+            this.node.updateTargetBindings();
+        }
+    }
+
+    deleteMethod() {
+        const name = this.method.del_met;
+        if (name) {
+            this.node.data.methods = this.node.data.methods.filter(method => {
+                return method.name !== name;
+            });
+            this.node.updateTargetBindings();
+        }
+    }
+
     addAttribute() {
         if (this.attribute.name !== '' && this.attribute.type !== '') {
             if (this.node) {
@@ -82,7 +105,8 @@ export class EditorComponent implements OnInit {
             this.attribute = {
                 name: '',
                 type: '',
-                error : false
+                error : false,
+                del_att: this.attribute.del_att
             }
             this.addAttributeModal.hide();
         } else {
@@ -102,7 +126,8 @@ export class EditorComponent implements OnInit {
             this.method = {
                 name: '',
                 type: '',
-                error: false
+                error: false,
+                del_met: this.method.del_met
             }
             this.addMethodModal.hide();
         } else {

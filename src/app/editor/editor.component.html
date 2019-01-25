@@ -9,66 +9,109 @@
                     <label for="text">Nom</label>
                 </div>
             </form>
-            <div *ngIf="node" class="mt-2 text-center">
-                <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Attribut</button>
+            <div *ngIf="node" class="mt-2 text-center row">
+                <div class="col-12">
+                    <div class="row">
+                        <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Attribut</button>
 
-                <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title w-100" id="myModalLabel">Nouvel attribut</h4>
-                            </div>
-                            <div class="modal-body">
+                        <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title w-100" id="myModalLabel">Nouvel attribut</h4>
+                                    </div>
+                                    <div class="modal-body">
 
-                                <div class="md-form">
-                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="attribute.name" id="att-name" type="text" name="att-name">
-                                    <label for="att-name">Nom</label>
+                                        <div class="md-form">
+                                            <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="attribute.name" id="att-name" type="text" name="att-name">
+                                            <label for="att-name">Nom</label>
+                                        </div>
+                                        <div class="md-form">
+                                            <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="attribute.type" id="att-type" type="text" name="att-type">
+                                            <label for="att-type">Type</label>
+                                        </div>
+                                        <div *ngIf="attribute.error" class="text-danger">Tous champs sont obligatoires</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Annuler</button>
+                                        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="addAttribute()">Ajouter</button>
+                                    </div>
                                 </div>
-                                <div class="md-form">
-                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="attribute.type" id="att-type" type="text" name="att-type">
-                                    <label for="att-type">Type</label>
-                                </div>
-                                <div *ngIf="attribute.error" class="text-danger">Tous champs sont obligatoires</div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Annuler</button>
-                                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="addAttribute()">Ajouter</button>
+                        </div>
+                        <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal2.show()" mdbWavesEffect>Methode</button>
+
+                        <div mdbModal #basicModal2="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal2.hide()">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title w-100" id="myModalLabel2">Nouvelle methode</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="md-form">
+                                            <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="method.name" id="met-name" type="text" name="met-name">
+                                            <label for="met-name">Nom</label>
+                                        </div>
+                                        <div class="md-form">
+                                            <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="method.type" id="met-type" type="text" name="met-type">
+                                            <label for="met-type">Type</label>
+                                        </div>
+                                        <div *ngIf="attribute.error" class="text-danger">Tous champs sont obligatoires</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal2.hide()" mdbWavesEffect>Annuler</button>
+                                        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="addMethod()" >Ajouter</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal2.show()" mdbWavesEffect>Methode</button>
 
-                <div mdbModal #basicModal2="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal2.hide()">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title w-100" id="myModalLabel2">Nouvelle methode</h4>
+
+                    <div class="row mt-3" *ngIf="node.data.properties && node.data.properties.length>0">
+                        <div class="col-12">
+                            <div class="row">
+                                <h3 class="col-12">Attributs</h3>
                             </div>
-                            <div class="modal-body">
-                                <div class="md-form">
-                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="method.name" id="met-name" type="text" name="met-name">
-                                    <label for="met-name">Nom</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="browser-default custom-select" [(ngModel)]="attribute.del_att">
+                                        <option *ngFor="let property of node.data.properties" [value]="property.name" >{{property.name}}</option>
+                                    </select>
                                 </div>
-                                <div class="md-form">
-                                    <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="method.type" id="met-type" type="text" name="met-type">
-                                    <label for="met-type">Type</label>
+                                <div class="col-6">
+                                    <button (click)="deleteAttribute()" type="button" mdbBtn style="border-radius: 30px;width: 130px" color="secondary" class="relative waves-light p-2">Supprimer</button>
                                 </div>
-                                <div *ngIf="attribute.error" class="text-danger">Tous champs sont obligatoires</div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal2.hide()" mdbWavesEffect>Annuler</button>
-                                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="addMethod()" >Ajouter</button>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row mt-3" *ngIf="node.data.methods && node.data.methods.length>0">
+                        <div class="col-12">
+                            <div class="row">
+                                <h3 class="col-12">Methodes</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="browser-default custom-select" [(ngModel)]="method.del_met">
+                                        <option *ngFor="let method of node.data.methods" [value]="method.name" >{{method.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <button (click)="deleteMethod()" type="button" mdbBtn style="border-radius: 30px;width: 130px" color="secondary" class="relative waves-light p-2">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
 
             </div>
         </div>
