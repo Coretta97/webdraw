@@ -1,8 +1,8 @@
-<app-user-header [active]="'home'"></app-user-header>
+<app-user-header [user]="user" [active]="'home'"></app-user-header>
 <div class="container pt-5">
     <div class="row"><h1 class="col-12 text-center text-muted">Liste des diagrammes</h1></div>
     <div class="row" *ngIf="files.length>0">
-        <div class="col-4 p-3" *ngFor="let file of files">
+        <div class="col-md-4 col-sm-6 p-3" *ngFor="let file of files">
             <div class="file">
                 <h3 class="text-truncate">{{file.name}}</h3>
                 <div>

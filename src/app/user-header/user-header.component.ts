@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../authentication.service';
+import {User} from '../models/User';
 
 @Component({
     selector: 'app-user-header',
@@ -10,6 +11,7 @@ import {AuthenticationService} from '../authentication.service';
 export class UserHeaderComponent implements OnInit {
 
     @Input() active: string;
+    @Input() user: User;
 
     constructor(private router: Router, private authentificationService: AuthenticationService) {
     }

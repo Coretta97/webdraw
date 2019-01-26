@@ -5,6 +5,7 @@ import {FilesService} from '../files.service';
 import {File} from '../models/File';
 import * as go from 'gojs';
 import {MDBModalRef} from 'angular-bootstrap-md';
+import {User} from '../models/User';
 
 @Component({
     selector: 'app-editor',
@@ -29,6 +30,7 @@ export class EditorComponent implements OnInit {
         del_met: null
     };
 
+    public user: User;
 
     model;
 
@@ -50,6 +52,8 @@ export class EditorComponent implements OnInit {
         if (!this.authentificationService.isConnected()) {
             this.router.navigateByUrl('/login');
         }
+
+        this.user = this.authentificationService.getUser();
 
         const him: EditorComponent = this;
         this.filesService.files().subscribe(r => {
