@@ -59,8 +59,8 @@ export class GraphComponent implements OnInit {
                 link.data.card_r = '1';
             }
 
-            link.updateRelationshipsFromData();
             link.updateTargetBindings();
+            link.updateRelationshipsFromData();
         });
 
         // the item template for properties
@@ -227,7 +227,7 @@ export class GraphComponent implements OnInit {
                     isMultiline: false,
                     editable: true
                 },
-                new go.Binding('card_l', 'card_l').makeTwoWay()),
+                new go.Binding('text', 'card_l').makeTwoWay()),
             this.$(go.TextBlock, 'relation',
                 {
                     font: '400 9pt Source Sans Pro, sans-serif',
@@ -245,12 +245,12 @@ export class GraphComponent implements OnInit {
                     isMultiline: false,
                     editable: true
                 },
-                new go.Binding('card_r', 'card_r').makeTwoWay()),
+                new go.Binding('text', 'card_r').makeTwoWay()),
         );
         return link;
     }
     setLink(type: number) {
-
+        this.linkType = type;
     }
 
     ngOnInit() {

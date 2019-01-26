@@ -66,11 +66,6 @@ export class EditorComponent implements OnInit {
                         him.file = file;
 
                         const content = JSON.parse(him.file.content);
-                        content['links'].forEach(link => {
-                            if (! link.relationship) {
-                                link.relationship = 1;
-                            }
-                        });
 
                         him.model = new go.GraphLinksModel(content['nodes'], content['links']);
                     }
