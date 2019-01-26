@@ -36,7 +36,7 @@ export class EditorComponent implements OnInit {
     private textField: ElementRef;
 
     data: any;
-    node: go.Node;
+    public node: go.Node = null;
 
     @ViewChild('basicModal')
     private addAttributeModal: MDBModalRef;
@@ -74,6 +74,7 @@ export class EditorComponent implements OnInit {
 
                         him.model = new go.GraphLinksModel(content['nodes'], content['links']);
                     }
+
                 });
                 if (this.file === null) {
                     this.router.navigateByUrl('/home');

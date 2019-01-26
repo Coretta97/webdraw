@@ -31,10 +31,10 @@ export class AuthenticationService {
             'email' : user.email,
             'password' : user.password,
             'tel' : user.tel
-        }), duration);
+        }), duration, '/', 'localhost');
     }
     public logout(): void {
-        this.cookieService.delete(this.user_session_key);
+        this.cookieService.delete(this.user_session_key, '/', 'localhost');
     }
 
 

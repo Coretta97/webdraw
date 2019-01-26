@@ -35,4 +35,19 @@ export class FilesService {
         }, httpOptions);
     }
 
+    create(file: File): Observable<object> {
+        return this.http.post('/api/create-file', {
+            idfile : file.idfile,
+            name : file.name,
+            content : file.content,
+            datefile : file.datefile,
+            user_id : file.user_id
+        }, httpOptions);
+    }
+
+    delete_file(file: File): Observable<object> {
+        return this.http.post('/api/delete-file', {
+            idfile: file.idfile
+        }, httpOptions);
+    }
 }

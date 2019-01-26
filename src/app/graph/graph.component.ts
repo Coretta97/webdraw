@@ -58,6 +58,8 @@ export class GraphComponent implements OnInit {
             if (!link.data.card_r) {
                 link.data.card_r = '1';
             }
+
+            link.updateRelationshipsFromData();
             link.updateTargetBindings();
         });
 

@@ -2,14 +2,14 @@
 <div class="container-fluid pt-4">
     <div class="row">
         <div class="col-3" style="border-right: 1px solid blueviolet">
-            <form *ngIf="node" #form="ngForm" (ngSubmit)="onCommitDetails()">
+            <form *ngIf="node != null" #form="ngForm" (ngSubmit)="onCommitDetails()">
                 <h4>Détails</h4>
                 <div class="md-form">
                     <input class="form-control" required="required" [mdbValidate]="false" mdbInputDirective [(ngModel)]="data.text" id="text" type="text" name="text">
                     <label for="text">Nom de la classe</label>
                 </div>
             </form>
-            <div *ngIf="node" class="mt-2 text-center row">
+            <div *ngIf="node != null" class="mt-2 text-center row">
                 <div class="col-12">
                     <div class="row">
                         <button type="button" mdbBtn style="border-radius: 30px;width: 130px" color="deep-purple" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Attribut</button>
