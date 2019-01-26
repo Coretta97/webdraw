@@ -1,7 +1,7 @@
 <app-user-header [active]="'home'"></app-user-header>
 <div class="container pt-5">
     <div class="row"><h1 class="col-12 text-center text-muted">Liste des diagrammes</h1></div>
-    <div class="row">
+    <div class="row" *ngIf="files.length>0">
         <div class="col-4 p-3" *ngFor="let file of files">
             <div class="file">
                 <h3 class="text-truncate">{{file.name}}</h3>
@@ -20,6 +20,9 @@
 
             </div>
         </div>
+    </div>
+    <div class="row mt-5" *ngIf="files.length <= 0">
+        <h5 class="col-12 text-center text-muted">Aucun diagramme créé</h5>
     </div>
 </div>
 
